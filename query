@@ -1,0 +1,24 @@
+create database test;
+use test;
+create table TblSeedDataTransaksi(
+  Id varchar(30) Not Null,
+  TanggalOrder DateTime,
+  StatusPelunasan Varchar(10),
+  TangalPembayaran DateTime,
+primary key (Id)
+);
+INSERT INTO `tblseeddatatransaksi` (`Id`, `TanggalOrder`, `StatusPelunasan`, `TangalPembayaran`) VALUES ('fghjr', '2022-03-07 19:26:04', 'lunas', '2022-03-07 19:26:09');
+
+create table TblSeedDataDetailTransaksi(
+  Id varchar(30) Not Null,
+  IdTransaksi varchar(30) Not Null,
+  Harga int(20),
+  Jumlah int(20),
+  Subtotal int(20),
+  primary key (Id),
+  foreign key (IdTransaksi) references TblSeedDataTransaksi (Id)
+);
+INSERT INTO `tblseeddatadetailtransaksi` (`Id`, `IdTransaksi`, `Harga`, `Jumlah`, `Subtotal`) VALUES ('tghj', 'fghjr', 6000, 7, `Harga`*`Jumlah`);
+
+
+Select From TblSeedDataTransaksi a Inner Join TblSeedDataDetailTransaksi b On a.Id = b.Id Where a.Id = 'fghjr';
